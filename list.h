@@ -76,7 +76,6 @@ public:
 	T    front() const;
 	T    last() const;
 	T    get(uint) const;
-	T kk() const;
 
 	void push_front(T);
 	void push_back(T);
@@ -377,11 +376,12 @@ template <class T>
 T List<T>::remove_at(uint index) {
     Node<T> *p;
     Node<T> *n;
+    int val;
     if (index==0){
-        pop_front();
+        return pop_front();
     }
     if (index==size-1){
-        pop_back();
+        return pop_back();
     }
     if (index<0||index>=size){
         throw IndexOutOfBounds();
@@ -392,11 +392,13 @@ T List<T>::remove_at(uint index) {
             p=p->next;
         }
         n=p->next;
+        val=n->value;
         p->next=n->next;
         delete n;
         size--;
+        return val;
     }
-
+    return -1;
 }
 
 // =================================================================
